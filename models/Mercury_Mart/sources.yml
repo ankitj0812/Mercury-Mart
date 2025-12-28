@@ -1,0 +1,53 @@
+version: 2
+
+sources:
+  - name: mart_raw
+    description: "Raw data sources from the MART_DEV_DB database."
+    database: MART_DEV_DB
+    schema: RAW
+
+    tables:
+      - name: raw_coupons
+        description: "Raw data containing discount codes, values, and validity periods."
+
+      - name: raw_customers
+        description: "Raw customer registry containing names, contact info, and identifiers."
+
+      - name: raw_inventory_snapshots
+        description: "Periodic snapshots of product stock levels."
+
+      - name: raw_marketing_campaigns
+        description: "Details of marketing initiatives, budgets, and platforms."
+
+      - name: raw_orders
+        description: "Header-level information for customer orders."
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+
+      - name: raw_order_items
+        description: "Line-item details for each order."
+
+      - name: raw_payments
+        description: "Transaction logs for payments."
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+
+      - name: raw_products
+        description: "Master list of products and SKUs."
+
+      - name: raw_refunds
+        description: "Records of returned items and refund amounts."
+
+      - name: raw_suppliers
+        description: "Directory of vendors and suppliers."
+
+      - name: raw_web_events
+        description: "Granular clickstream data tracking user actions."
+        freshness:
+          warn_after: {count: 6, period: hour}
+          error_after: {count: 12, period: hour}
+
+      - name: raw_web_sessions
+        description: "Sessionized web traffic data."
