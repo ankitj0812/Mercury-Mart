@@ -1,0 +1,45 @@
+exposures:
+  - name: revenue_performance_dashboard
+    type: dashboard
+    maturity: high
+    description: >
+      Executive dashboard tracking revenue, orders,
+      discounts and payment performance over time.
+
+    url: https://bi.company.com/dashboards/revenue-performance
+
+    depends_on:
+      - ref('fct_orders_daily')
+      - ref('dim_customers')
+      - ref('dim_products')
+
+    owner:
+      name: Data Analytics Team
+      email: analytics@company.com
+
+    tags:
+      - revenue
+      - finance
+      - executive
+
+  - name: marketing_campaign_insights_report
+    type: analysis
+    maturity: medium
+    description: >
+      Analytical report evaluating marketing campaign
+      performance using order revenue and customer behavior.
+
+    url: https://bi.company.com/reports/marketing-campaign-insights
+
+    depends_on:
+      - ref('fct_orders_daily')
+      - ref('dim_customers')
+
+    owner:
+      name: Marketing Analytics
+      email: marketing-analytics@company.com
+
+    tags:
+      - marketing
+      - campaigns
+      - growth

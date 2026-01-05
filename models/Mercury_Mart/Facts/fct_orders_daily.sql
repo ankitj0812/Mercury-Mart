@@ -5,15 +5,22 @@
 ) }}
 
 with orders as (
+
     select
         order_id,
         customer_id,
         order_date,
         gross_amount,
 
-        -- Discounts must be positive
+        -- Discounts must always be positive
         abs(discount_amount) as discount_amount
     from {{ ref('stg_mercurymart__orders') }}
+
+    {% if is_incremental() %}
+        -- Date-based pruning for cost efficiency
+        where order_date >= dateadd(day, -3, current_date)
+    {% endif %}
+
 ),
 
 payments_refunds as (
